@@ -1,0 +1,35 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(<%=image_url('index_picture.jpg') %>);">
+  <div class="container">
+    <h1><strong>CAR FOR ALL !</strong></h1>
+    <br>
+    <div class="box-between">
+      <p>Book your car !</p>
+      <%= link_to "All cars", cars_path, class: "btn btn-ghost" %>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5 d-flex justify-content-between product-info">
+  <div>
+    <% url = "https://loremflickr.com/540/540/" + @car.brand + ","
+                                                + @car.model + "/all" %>
+    <img src= "<%= url %>" />
+    <h2 class="mt-3"><%= @car.brand %></h2>
+    <h2><em><%= @car.model %> - <%= @car.year_of_production %></em></h2>
+    <br>
+    <h3><%= @car.address %></h3>
+  </div>
+  <div class="align-self-center">
+    <h1><%= @car.price_per_day %> € / day</h1>
+  </div>
+  <div>
+    <h2>Book here</h2>
+    <%= simple_form_for [@car, @car.bookings.new] do |f| %>
+      <%= f.input :starts_at, as: :string,
+        input_html: {id: "range_start"} %>
+      <%= f.input :ends_at, as: :string,
+        input_html: {id: "range_end"} %>
+      <%= f.submit "Validate", class: "btn btn-ghost" %>
+    <% end %>
+  </div>
+</div>
